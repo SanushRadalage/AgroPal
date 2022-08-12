@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "545971873958",
+    "project_id": "agropal-532e9",
+    "storage_bucket": "agropal-532e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545971873958:android:45916242b3624270b86c67",
+        "android_client_info": {
+          "package_name": "com.sanushradalage.agropal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545971873958-9haki78hh9tg8aam36bmm34tbrqsvgc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOg4Sgj1slzFlofjUKJR3MJY4OeXxPraY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545971873958-9haki78hh9tg8aam36bmm34tbrqsvgc3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
