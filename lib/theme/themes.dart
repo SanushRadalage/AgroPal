@@ -5,8 +5,10 @@ ThemeData getAppTheme() {
   return ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     backgroundColor: Colors.white,
+    primaryColor: AppColors.primary,
+    primaryColorLight: AppColors.primary,
     brightness: Brightness.light,
-    buttonTheme: const ButtonThemeData(height: 50),
+    buttonTheme: ButtonThemeData(height: 50, buttonColor: AppColors.primary),
     fontFamily: 'SF Pro Text',
     tabBarTheme: TabBarTheme(
       labelColor: AppColors.secondary,

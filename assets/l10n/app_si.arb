@@ -1,5 +1,10 @@
 {
 	"appName": "AgroPal",
     "localeTitle": "ආයුබෝවන්!\nකරුණාකර ඔබගේ භාෂාව\nතෝරන්න",
-    "next": "Next"
+    "next": "ඊළඟ",
+    "loginTitle": "කරුණාකර ඔබගේ ජංගම දුරකථන අංකය\nඇතුලත් කරන්න",
+    "mobileNumber": "ජංගම දුරකථන අංකය",
+    "invalidMobileNumber": "වලංගු නොවන ජංගම දුරකථන අංකයකි",
+    "otpTitle": "කරුණාකර OTP අංකය\nඇතුලත් කරන්න",
+	"done": "ඉදිරිපත් කරන්න"
 }

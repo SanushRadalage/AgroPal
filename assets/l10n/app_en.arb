@@ -1,5 +1,10 @@
 {
 	"appName": "AgroPal",
 	"localeTitle": "Hello!\nPlease Select Your\nLanguage",
-	"next": "Next"
+	"next": "Next",
+	"loginTitle": "Please enter your\nmobile number",
+	"mobileNumber": "Mobile Number",
+	"invalidMobileNumber": "invalid mobile number",
+	"otpTitle": "Please enter the\notp",
+	"done": "Done"
 }

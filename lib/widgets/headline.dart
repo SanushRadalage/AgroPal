@@ -2,6 +2,9 @@ import 'package:agropal/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class Headline extends StatelessWidget {
+  final double size;
+
+  Headline({required this.size});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -13,7 +16,7 @@ class Headline extends StatelessWidget {
           style: TextStyle(
               fontFamily: 'SF Pro Text',
               fontWeight: FontWeight.bold,
-              fontSize: 40,
+              fontSize: size,
               color: AppColors.primary),
         ),
         Text(
@@ -21,7 +24,7 @@ class Headline extends StatelessWidget {
           style: TextStyle(
               fontFamily: 'SF Pro Text',
               fontWeight: FontWeight.bold,
-              fontSize: 40,
+              fontSize: size,
               color: AppColors.secondary),
         ),
       ],

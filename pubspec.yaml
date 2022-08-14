@@ -22,6 +22,8 @@ dependencies:
       ref: master
   intl: ^0.17.0
   firebase_core: ^1.20.0
+  pin_code_fields: ^7.3.0
+  firebase_auth: ^3.6.3
 
 dev_dependencies:
   flutter_test:

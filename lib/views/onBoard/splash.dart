@@ -1,15 +1,26 @@
+import 'package:agropal/providers/auth_notifier.dart';
+import 'package:agropal/providers/time_notifier.dart';
 import 'package:agropal/widgets/headline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../providers/time_notifier.dart';
 
 class Splash extends ConsumerWidget {
   const Splash({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(timerProvider).delayOnNavigate(context, 5, "/localeSelection");
+    ref.watch(authStateProvider).when(
+        data: (data) {
+          if (data != null) {
+            ref.read(timerProvider).delayOnNavigate(context, 5, "/home");
+          } else {
+            ref
+                .read(timerProvider)
+                .delayOnNavigate(context, 5, "/localeSelection");
+          }
+        },
+        loading: () => {},
+        error: (e, trace) => {});
     return Scaffold(
       body: Center(
         child: Container(
@@ -23,7 +34,10 @@ class Splash extends ConsumerWidget {
           // padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 40.h),
           child: SafeArea(
             child: Padding(
-                padding: const EdgeInsets.only(top: 32), child: Headline()),
+                padding: const EdgeInsets.only(top: 32),
+                child: Headline(
+                  size: 40,
+                )),
           ),
         ),
       ),

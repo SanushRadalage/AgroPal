@@ -1,12 +1,12 @@
 import 'package:agropal/models/language_item_model.dart';
 import 'package:agropal/providers/locale_notifier.dart';
 import 'package:agropal/theme/themes.dart';
+import 'package:agropal/widgets/app_bar.dart';
+import 'package:agropal/widgets/buttons.dart';
 import 'package:agropal/widgets/headline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../widgets/buttons.dart';
 
 class LocaleSelection extends ConsumerWidget {
   const LocaleSelection({Key? key}) : super(key: key);
@@ -28,10 +28,11 @@ class LocaleSelection extends ConsumerWidget {
       ),
     ];
 
-    LanguageItem languageSelection =
-        languages.firstWhere((item) => 'en' == item.key);
+    LanguageItem languageSelection = languages.firstWhere(
+        (item) => ref.watch(localeProvider).languageCode == item.key);
 
     return Scaffold(
+      appBar: MainAppBar(isLeading: false),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Container(
@@ -40,7 +41,6 @@ class LocaleSelection extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Headline(),
               const SizedBox(
                 height: 40,
               ),
@@ -63,15 +63,16 @@ class LocaleSelection extends ConsumerWidget {
                 children: [
                   DropdownButtonFormField(
                     decoration: const InputDecoration(
-                      icon: Icon(
-                        Icons.language,
-                        size: 20,
-                      ),
-                    ),
-                    onChanged: (LanguageItem? value) {},
-                    onSaved: (LanguageItem? value) {
+                        // icon: Icon(
+                        //   Icons.language,
+                        //   size: 20,
+                        // ),
+                        border: OutlineInputBorder(
+                            gapPadding: 2, borderSide: BorderSide(width: 0))),
+                    onChanged: (LanguageItem? value) {
                       if (value != null) languageSelection = value;
                     },
+                    onSaved: (LanguageItem? value) {},
                     value: languageSelection,
                     items: languages.map<DropdownMenuItem<LanguageItem>>(
                         (LanguageItem item) {
@@ -86,10 +87,9 @@ class LocaleSelection extends ConsumerWidget {
                   ),
                   MainElevatedButton(
                       onPressed: () {
-                        ref
-                            .watch(localeProvider)
-                            .setLocale(Locale(languageSelection.key));
-                        Navigator.of(context).pushNamed('/login');
+                        ref.read(localeProvider.state).state =
+                            Locale(languageSelection.key);
+                        Navigator.of(context).popAndPushNamed('/login');
                       },
                       child: Text(AppLocalizations.of(context)!.next)),
                 ],
