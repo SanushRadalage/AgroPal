@@ -1,4 +1,5 @@
 import 'package:agropal/providers/auth_notifier.dart';
+import 'package:agropal/theme/colors.dart';
 import 'package:agropal/theme/themes.dart';
 import 'package:agropal/widgets/app_bar.dart';
 import 'package:agropal/widgets/buttons.dart';
@@ -47,8 +48,8 @@ class Login extends ConsumerWidget {
                     ),
                     IntlPhoneField(
                       decoration: InputDecoration(
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.primary),
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(width: 0),
@@ -75,7 +76,21 @@ class Login extends ConsumerWidget {
                           ref.watch(authenticationProvider).signInWithPhone(
                               context, ref.watch(loginModelProvider).loginModel,
                               () {
-                            Navigator.of(context).popAndPushNamed('/home');
+                            ref.watch(authStateProvider).when(
+                                data: (data) {
+                                  if (data != null) {
+                                    if (data.displayName == null) {
+                                      Navigator.of(context)
+                                          .popAndPushNamed('/userDetails');
+                                    } else {
+                                      Navigator.of(context)
+                                          .popAndPushNamed('/home');
+                                    }
+                                  }
+                                },
+                                error:
+                                    (Object error, StackTrace? stackTrace) {},
+                                loading: () {});
                           }, () {
                             snackBar(AppLocalizations.of(context)!
                                 .invalidMobileNumber);

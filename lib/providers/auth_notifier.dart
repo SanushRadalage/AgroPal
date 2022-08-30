@@ -28,7 +28,7 @@ class LoginModelNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateOtp(String otp) {
+  updateOtp(String? otp) {
     if (otp != null) _otp = otp;
     notifyListeners();
   }

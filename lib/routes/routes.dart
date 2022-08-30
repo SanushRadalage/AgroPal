@@ -1,5 +1,6 @@
 import 'package:agropal/views/auth/login.dart';
 import 'package:agropal/views/auth/otp.dart';
+import 'package:agropal/views/auth/user_details.dart';
 import 'package:agropal/views/home/home.dart';
 import 'package:agropal/views/onBoard/locale_selection.dart';
 import 'package:agropal/views/onBoard/splash.dart';
@@ -9,7 +10,9 @@ class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/home':
-        return MaterialPageRoute(builder: (context) => const Home());
+        return MaterialPageRoute(builder: (context) => Home());
+      case '/userDetails':
+        return MaterialPageRoute(builder: (context) => UserDetails());
       case '/localeSelection':
         return MaterialPageRoute(builder: (context) => const LocaleSelection());
       case '/login':

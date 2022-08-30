@@ -6,5 +6,15 @@
     "mobileNumber": "கைபேசி எண்",
     "invalidMobileNumber": "தவறான மொபைல் எண்",
     "otpTitle": "OTP எண்ணை\nஉள்ளிடவும்",
-	"done": "முடிந்தது"
+	"done": "முடிந்தது",
+    "farmer": "Farmer",
+	"landOwner": "Land Owner",
+	"firstName": "First Name",
+	"lastName": "Last Name",
+	"nic": "NIC/Passport",
+	"validationFName": "Enter a valid first name",
+	"validationLName": "Enter a valid last name",
+	"validationNIC": "Enter a valid NIC",
+	"commonErrorMsg": "Oops! Something went wrong."
+
 }

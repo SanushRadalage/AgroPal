@@ -1,9 +1,9 @@
 import 'package:agropal/models/language_item_model.dart';
 import 'package:agropal/providers/locale_notifier.dart';
+import 'package:agropal/theme/colors.dart';
 import 'package:agropal/theme/themes.dart';
 import 'package:agropal/widgets/app_bar.dart';
 import 'package:agropal/widgets/buttons.dart';
-import 'package:agropal/widgets/headline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,13 +62,16 @@ class LocaleSelection extends ConsumerWidget {
               Column(
                 children: [
                   DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                        // icon: Icon(
-                        //   Icons.language,
-                        //   size: 20,
-                        // ),
-                        border: OutlineInputBorder(
-                            gapPadding: 2, borderSide: BorderSide(width: 0))),
+                    decoration: InputDecoration(
+                      // icon: Icon(
+                      //   Icons.language,
+                      //   size: 20,
+                      // ),
+                      border: const OutlineInputBorder(
+                          gapPadding: 2, borderSide: BorderSide(width: 0)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.primary)),
+                    ),
                     onChanged: (LanguageItem? value) {
                       if (value != null) languageSelection = value;
                     },

@@ -1,9 +1,8 @@
-import 'package:agropal/theme/themes.dart';
 import 'package:flutter/material.dart';
 
 class MainElevatedButton extends StatelessWidget {
-  late final VoidCallback? onPressed;
-  late final Widget? child;
+  final VoidCallback? onPressed;
+  final Widget? child;
 
   MainElevatedButton({required this.onPressed, required this.child});
   @override

@@ -1,9 +1,14 @@
 import 'package:agropal/models/login_model.dart';
+import 'package:agropal/models/signup_model.dart';
+import 'package:agropal/widgets/snack_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthRepository {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final _db = FirebaseFirestore.instance;
 
   Stream<User?> get authStateChange => _auth.authStateChanges();
 
@@ -68,6 +73,27 @@ class AuthRepository {
         onSuccess();
       }, onError: (e) => _onError(context, e, onError));
     }
+  }
+
+  Future<void> updateUser(BuildContext context, SignupModel signupModel) async {
+    await _auth.currentUser
+        ?.updateDisplayName(signupModel.firstName + signupModel.lastName)
+        .then((value) {
+      final user = <String, dynamic>{
+        "nic": signupModel.nic,
+        "type": signupModel.type
+      };
+
+      _db
+          .collection("users")
+          .doc(_auth.currentUser?.uid)
+          .set(user)
+          .whenComplete(() {
+        Navigator.of(context).popAndPushNamed('/home');
+      }).onError((error, stackTrace) {
+        snackBar(AppLocalizations.of(context)!.commonErrorMsg);
+      });
+    });
   }
 
   _onError(

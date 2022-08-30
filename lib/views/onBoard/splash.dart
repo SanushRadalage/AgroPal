@@ -12,7 +12,13 @@ class Splash extends ConsumerWidget {
     ref.watch(authStateProvider).when(
         data: (data) {
           if (data != null) {
-            ref.read(timerProvider).delayOnNavigate(context, 5, "/home");
+            if (data.displayName != null) {
+              ref.read(timerProvider).delayOnNavigate(context, 5, "/home");
+            } else {
+              ref
+                  .read(timerProvider)
+                  .delayOnNavigate(context, 5, "/userDetails");
+            }
           } else {
             ref
                 .read(timerProvider)

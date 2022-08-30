@@ -1,14 +1,13 @@
 import 'package:agropal/providers/auth_notifier.dart';
 import 'package:agropal/theme/colors.dart';
 import 'package:agropal/theme/themes.dart';
+import 'package:agropal/widgets/app_bar.dart';
 import 'package:agropal/widgets/buttons.dart';
 import 'package:agropal/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../widgets/app_bar.dart';
 
 class OtpVerifier extends ConsumerWidget {
   const OtpVerifier({Key? key}) : super(key: key);
@@ -73,7 +72,20 @@ class OtpVerifier extends ConsumerWidget {
                       onPressed: () {
                         ref.watch(authenticationProvider).verifyOtp(
                             context, ref.watch(loginModelProvider).otp!, () {
-                          Navigator.of(context).popAndPushNamed('/home');
+                          ref.watch(authStateProvider).when(
+                              data: (data) {
+                                if (data != null) {
+                                  if (data.displayName == null) {
+                                    Navigator.of(context)
+                                        .popAndPushNamed('/userDetails');
+                                  } else {
+                                    Navigator.of(context)
+                                        .popAndPushNamed('/home');
+                                  }
+                                }
+                              },
+                              error: (Object error, StackTrace? stackTrace) {},
+                              loading: () {});
                         }, () {
                           snackBar(AppLocalizations.of(context)!
                               .invalidMobileNumber);
