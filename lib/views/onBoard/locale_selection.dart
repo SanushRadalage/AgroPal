@@ -1,5 +1,6 @@
 import 'package:agropal/models/language_item_model.dart';
 import 'package:agropal/providers/locale_notifier.dart';
+import 'package:agropal/providers/settings_notifier.dart';
 import 'package:agropal/theme/colors.dart';
 import 'package:agropal/theme/themes.dart';
 import 'package:agropal/widgets/app_bar.dart';
@@ -63,10 +64,6 @@ class LocaleSelection extends ConsumerWidget {
                 children: [
                   DropdownButtonFormField(
                     decoration: InputDecoration(
-                      // icon: Icon(
-                      //   Icons.language,
-                      //   size: 20,
-                      // ),
                       border: const OutlineInputBorder(
                           gapPadding: 2, borderSide: BorderSide(width: 0)),
                       focusedBorder: OutlineInputBorder(
@@ -90,6 +87,9 @@ class LocaleSelection extends ConsumerWidget {
                   ),
                   MainElevatedButton(
                       onPressed: () {
+                        ref
+                            .read(settingsProvider)
+                            .setLocalePref(languageSelection.key);
                         ref.read(localeProvider.state).state =
                             Locale(languageSelection.key);
                         Navigator.of(context).popAndPushNamed('/login');

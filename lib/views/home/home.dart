@@ -5,6 +5,7 @@ import 'package:agropal/views/home/pages/feed.dart';
 import 'package:agropal/views/home/pages/jobs.dart';
 import 'package:agropal/views/home/pages/profile.dart';
 import 'package:agropal/widgets/app_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,6 +13,7 @@ class Home extends StatelessWidget {
   static const List<Widget> _widgetOptions = <Widget>[
     Feed(),
     ChatList(),
+    Text("Create Post"),
     Jobs(),
     Profile()
   ];
@@ -44,6 +46,10 @@ class Home extends StatelessWidget {
               label: 'Chat',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.add_box),
+              label: 'Create Post',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.task),
               label: 'My Jobs',
             ),
@@ -55,7 +61,11 @@ class Home extends StatelessWidget {
           currentIndex: bottonNavProvider.currentIndex,
           selectedItemColor: AppColors.primary,
           onTap: (value) {
-            bottonNavProvider.currentIndex = value;
+            if (value == 2) {
+              Navigator.of(context).pushNamed('/createPost');
+            } else {
+              bottonNavProvider.currentIndex = value;
+            }
           },
         ),
       );
