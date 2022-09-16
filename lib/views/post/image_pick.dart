@@ -7,7 +7,6 @@ import 'package:agropal/utils/image_picker.dart';
 import 'package:agropal/widgets/app_bar.dart';
 import 'package:agropal/widgets/buttons.dart';
 import 'package:agropal/widgets/picker_container.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -8,5 +8,5 @@ class PostModel {
   bool organicStatus = true;
   String leagalFundStatus = "0%";
   late String cropType;
-  List<String> images = [];
+  List<String?> images = [];
 }

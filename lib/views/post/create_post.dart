@@ -121,8 +121,7 @@ class CreatePost extends StatelessWidget {
                               height: 16,
                             ),
                             CustomTextField(
-                                labelText:
-                                    AppLocalizations.of(context)!.address,
+                                labelText: AppLocalizations.of(context)!.city,
                                 onSaved: (String? value) {
                                   ref
                                       .watch(createPostModelProvider)

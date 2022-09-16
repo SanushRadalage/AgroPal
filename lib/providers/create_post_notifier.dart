@@ -1,6 +1,5 @@
 import 'package:agropal/models/post_model.dart';
 import 'package:agropal/repository/post_repository.dart';
-import 'package:agropal/views/post/create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

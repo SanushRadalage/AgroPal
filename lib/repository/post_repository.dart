@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:agropal/models/feed_item.dart';
 import 'package:agropal/models/post_model.dart';
 import 'package:agropal/widgets/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,16 +24,19 @@ class PostRepository {
     final post = <String, dynamic>{
       "district": postModel.district,
       "address": postModel.address,
-      "landSize": "${postModel.size} ${postModel.mesureUnit}",
+      "landSize": postModel.size,
+      "measureUnit": postModel.mesureUnit,
       "withFund": postModel.fundStatus,
       "withEquipment": postModel.equipmentStatus,
       "isOrganic": postModel.organicStatus,
       "leagalFund": postModel.leagalFundStatus,
       "cropType": postModel.cropType,
-      "images": postModel.images.isNotEmpty ? postModel.images : null,
+      "images": postModel.images.isNotEmpty ? postModel.images : [],
       "userId": _auth.currentUser?.uid,
       "userName": _auth.currentUser?.displayName,
-      "avatar": _auth.currentUser?.photoURL
+      "avatar": _auth.currentUser?.photoURL,
+      "createdAt": Timestamp.now(),
+      "updatedAt": Timestamp.now()
     };
 
     _db.collection("posts").doc(uuid).set(post).whenComplete(() {
@@ -65,6 +69,37 @@ class PostRepository {
     List<String> urls = [];
     await Future.wait(images.map((image) => uploadFile(context, image)))
         .then((value) => print(value));
+  }
+
+  Future<List<FeedItem>> fetchPosts(FeedItem? feedItem) async {
+    final ref = _db.collection('posts');
+
+    final documentSnapshot = feedItem == null
+        ? await ref.orderBy('createdAt', descending: true).limit(250).get()
+        : await ref
+            .orderBy("createdAt", descending: true)
+            .startAfter([feedItem.createdAt])
+            .limit(250)
+            .get();
+
+    return documentSnapshot.docs
+        .map<FeedItem>((data) => FeedItem(
+            district: data['district'],
+            address: data['address'],
+            landSize: data['landSize'],
+            measureUnit: data['measureUnit'],
+            withFund: data['withFund'],
+            withEquipment: data['withEquipment'],
+            isOrganic: data['isOrganic'],
+            leagalFund: data['leagalFund'],
+            cropType: data['cropType'],
+            images: data['images'],
+            userId: data['userId'],
+            userName: data['userName'],
+            avatar: data['avatar'],
+            createdAt: data['createdAt'],
+            updatedAt: data['updatedAt']))
+        .toList();
   }
 
   _onError(

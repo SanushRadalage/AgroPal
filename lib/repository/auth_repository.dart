@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:agropal/models/login_model.dart';
 import 'package:agropal/models/signup_model.dart';
 import 'package:agropal/widgets/snack_bar.dart';
@@ -33,7 +34,6 @@ class AuthRepository {
         },
         verificationFailed: (FirebaseAuthException e) {
           _onError(context, e, onError);
-          print(e.message);
         },
         codeSent: (verificationId, forceResendingToken) {
           _codeSent(verificationId, forceResendingToken);
