@@ -17,8 +17,8 @@
 	"validationNIC": "වලංගු හැඳුනුම්පතක් හෝ විදේශ ගමන් බලපත්‍ර අංකයක් ඇතුළත් කරන්න",
 	"commonErrorMsg": "නැවත උත්සහා කරන්න!",
 	"district": "District",
-	"address": "Address",
-	"size": "Size",
+	"city": "City",
+    "size": "Size",
 	"investmentStatus": "මුදල් ආයෝජනය",
 	"machinery": "With Machinery",
 	"organic": "Organic Farming",
@@ -61,7 +61,7 @@
 	"rice": "Rice",
 	"flowers": "Flowers",
 	"other": "Other",
-    "validationAddress": "Enter a valid address",
+    "validationAddress": "Enter a valid city",
     "validationSize": "Enter a valid land size",
     "landSize": "Land Size",
 	"imageUploadDesc": "ඔබට පෝස්ට් එකට ඇමිණීම සඳහා උපරිම වශයෙන් පින්තූර 4ක් තෝරා ගැනීමට හෝ ග්‍රහණය කර ගැනීමට හැකිය.",
@@ -69,5 +69,6 @@
     "camera": "Photo with Camera",
 	"gallery": "Photo from Gallery",
     "cancel": "Cancel",
-    "createPostSuccess": "The post was created Successfully."
+    "createPostSuccess": "The post was created Successfully.",
+	"investOnFarming" : "Invest on farming"
 }

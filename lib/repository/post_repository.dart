@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:agropal/models/feed_item.dart';
 import 'package:agropal/models/post_model.dart';
 import 'package:agropal/widgets/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,16 +24,19 @@ class PostRepository {
     final post = <String, dynamic>{
       "district": postModel.district,
       "address": postModel.address,
-      "landSize": "${postModel.size} ${postModel.mesureUnit}",
+      "landSize": postModel.size,
+      "measureUnit": postModel.mesureUnit,
       "withFund": postModel.fundStatus,
       "withEquipment": postModel.equipmentStatus,
       "isOrganic": postModel.organicStatus,
       "leagalFund": postModel.leagalFundStatus,
       "cropType": postModel.cropType,
-      "images": postModel.images.isNotEmpty ? postModel.images : null,
+      "images": postModel.images.isNotEmpty ? postModel.images : [],
       "userId": _auth.currentUser?.uid,
       "userName": _auth.currentUser?.displayName,
-      "avatar": _auth.currentUser?.photoURL
+      "avatar": _auth.currentUser?.photoURL,
+      "createdAt": Timestamp.now(),
+      "updatedAt": Timestamp.now()
     };
 
     _db.collection("posts").doc(uuid).set(post).whenComplete(() {
@@ -45,7 +49,7 @@ class PostRepository {
     });
   }
 
-  Future<String?> uploadFile(BuildContext context, File file) async {
+  Future<String?> _uploadFile(BuildContext context, File file) async {
     try {
       final task = await _storage
           .ref('posts')
@@ -61,10 +65,42 @@ class PostRepository {
     }
   }
 
-  Future uploadFiles(BuildContext context, List<File> images) async {
+  Future<List<String>> uploadFiles(
+      BuildContext context, List<File> images) async {
     List<String> urls = [];
-    await Future.wait(images.map((image) => uploadFile(context, image)))
-        .then((value) => print(value));
+    for (var element in images) {
+      final url = await _uploadFile(context, element);
+      if (url != null) {
+        urls.add(url);
+      }
+    }
+    return urls;
+  }
+
+  Stream<Iterable<FeedItem>> streamFeedItems(
+      String cropType, String district, int fundStatus) {
+    final ref = _db.collection('posts');
+
+    if (cropType != "") {
+      ref.where('cropType', isEqualTo: cropType);
+    }
+
+    if (district != "") {
+      ref.where('district', isEqualTo: district);
+    }
+
+    if (fundStatus == 1) {
+      ref.where('withFund', isEqualTo: false);
+    } else if (fundStatus == 2) {
+      ref.where('withFund', isEqualTo: true);
+    }
+
+    return ref
+        .orderBy("createdAt", descending: true)
+        .limit(250)
+        .snapshots()
+        .map((event) =>
+            event.docs.map((doc) => FeedItem.fromMap(doc.id, doc.data())));
   }
 
   _onError(

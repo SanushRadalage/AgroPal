@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:agropal/models/login_model.dart';
 import 'package:agropal/models/signup_model.dart';
 import 'package:agropal/widgets/snack_bar.dart';
@@ -20,6 +21,10 @@ class AuthRepository {
     await _auth.signOut();
   }
 
+  String getUserId() {
+    return _auth.currentUser!.uid;
+  }
+
   Future<void> signInWithPhone(
       BuildContext context,
       LoginModel loginModel,
@@ -33,7 +38,6 @@ class AuthRepository {
         },
         verificationFailed: (FirebaseAuthException e) {
           _onError(context, e, onError);
-          print(e.message);
         },
         codeSent: (verificationId, forceResendingToken) {
           _codeSent(verificationId, forceResendingToken);
@@ -77,7 +81,7 @@ class AuthRepository {
 
   Future<void> updateUser(BuildContext context, SignupModel signupModel) async {
     await _auth.currentUser
-        ?.updateDisplayName(signupModel.firstName + signupModel.lastName)
+        ?.updateDisplayName("${signupModel.firstName} ${signupModel.lastName}")
         .then((value) {
       final user = <String, dynamic>{
         "nic": signupModel.nic,

@@ -7,7 +7,6 @@ import 'package:agropal/utils/image_picker.dart';
 import 'package:agropal/widgets/app_bar.dart';
 import 'package:agropal/widgets/buttons.dart';
 import 'package:agropal/widgets/picker_container.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -91,13 +90,13 @@ class ImagePickView extends StatelessWidget {
                     ),
                     MainElevatedButton(
                         onPressed: () async {
-                          if (ref.watch(fileProvider).fileOne != null) {
-                            String? url = await ref
+                          ref.watch(fileProvider).addImages();
+                          if (ref.watch(fileProvider).images.isNotEmpty) {
+                            List<String> urls = await ref
                                 .watch(createPostModelProvider)
                                 .postRepository
-                                .uploadFile(
-                                    context, ref.watch(fileProvider).fileOne!);
-                            List<String> urls = [url!];
+                                .uploadFiles(
+                                    context, ref.watch(fileProvider).images);
                             ref
                                 .watch(createPostModelProvider)
                                 .updateModel(images: urls);
