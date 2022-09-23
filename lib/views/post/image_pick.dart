@@ -90,13 +90,13 @@ class ImagePickView extends StatelessWidget {
                     ),
                     MainElevatedButton(
                         onPressed: () async {
-                          if (ref.watch(fileProvider).fileOne != null) {
-                            String? url = await ref
+                          ref.watch(fileProvider).addImages();
+                          if (ref.watch(fileProvider).images.isNotEmpty) {
+                            List<String> urls = await ref
                                 .watch(createPostModelProvider)
                                 .postRepository
-                                .uploadFile(
-                                    context, ref.watch(fileProvider).fileOne!);
-                            List<String> urls = [url!];
+                                .uploadFiles(
+                                    context, ref.watch(fileProvider).images);
                             ref
                                 .watch(createPostModelProvider)
                                 .updateModel(images: urls);

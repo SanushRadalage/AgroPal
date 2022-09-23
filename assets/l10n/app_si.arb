@@ -69,5 +69,6 @@
     "camera": "Photo with Camera",
 	"gallery": "Photo from Gallery",
     "cancel": "Cancel",
-    "createPostSuccess": "The post was created Successfully."
+    "createPostSuccess": "The post was created Successfully.",
+	"investOnFarming" : "Invest on farming"
 }

@@ -1,35 +1,52 @@
+import 'dart:developer';
+
+import 'package:agropal/models/feed_item.dart';
 import 'package:agropal/providers/feed_item_provider.dart';
-import 'package:agropal/widgets/feed/item_list.dart';
-import 'package:agropal/widgets/feed/ongoing_bottom_widget.dart';
+import 'package:agropal/widgets/feed/feed_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 class Feed extends ConsumerWidget {
-  Feed({Key? key}) : super(key: key);
-
-  final ScrollController scrollController = ScrollController();
-
+  const Feed({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    scrollController.addListener(() {
-      double maxScroll = scrollController.position.maxScrollExtent;
-      double currentScroll = scrollController.position.pixels;
-      double delta = MediaQuery.of(context).size.width * 0.20;
-      if (maxScroll - currentScroll <= delta) {
-        ref.read(itemsProvider.notifier).fetchNextBatch();
-      }
-    });
-    return CustomScrollView(
-      controller: scrollController,
-      slivers: const [
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 12,
-          ),
-        ),
-        ItemsList(),
-        OnGoingBottomWidget(),
-      ],
+    return StreamBuilder<Iterable<FeedItem>>(
+      stream: ref.watch(postRepositoryProvider).streamFeedItems(
+          ref.watch(sortOptionProvider).cropType,
+          ref.watch(sortOptionProvider).district,
+          ref.watch(sortOptionProvider).fundStatus),
+      builder: (context, snapshot) {
+        final list = snapshot.data?.toList() ?? [];
+
+        if (snapshot.hasError) {
+          return Center(
+              child: Lottie.asset(
+            'assets/lotties/error.json',
+            width: 200,
+            height: 200,
+            fit: BoxFit.fill,
+          ));
+        } else {
+          if (list.isNotEmpty) {
+            return ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                log(ref.watch(sortOptionProvider).cropType);
+                return FeedListItem(item: list[index]);
+              },
+            );
+          } else {
+            return Center(
+                child: Lottie.asset(
+              'assets/lotties/empty.json',
+              width: 200,
+              height: 200,
+              fit: BoxFit.fill,
+            ));
+          }
+        }
+      },
     );
   }
 }

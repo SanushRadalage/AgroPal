@@ -6,6 +6,7 @@ import 'package:agropal/views/home/pages/feed.dart';
 import 'package:agropal/views/home/pages/jobs.dart';
 import 'package:agropal/views/home/pages/profile.dart';
 import 'package:agropal/widgets/app_bar.dart';
+import 'package:agropal/widgets/feed_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,15 +37,7 @@ class Home extends StatelessWidget {
                         showModalBottomSheet<void>(
                             context: context,
                             builder: (BuildContext context) {
-                              return SizedBox(
-                                  child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Text('GeeksforGeeks'),
-                                  ],
-                                ),
-                              ));
+                              return const MainBottomSheet();
                             });
                       },
                       child: const Icon(
@@ -101,6 +94,10 @@ class Home extends StatelessWidget {
               Navigator.of(context).pushNamed('/createPost');
             } else {
               bottonNavProvider.currentIndex = value;
+            }
+
+            if (value == 0) {
+              // ref.read(itemsProvider.notifier).fetchFirstBatch();
             }
           },
         ),

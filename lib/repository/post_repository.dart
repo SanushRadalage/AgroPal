@@ -49,7 +49,7 @@ class PostRepository {
     });
   }
 
-  Future<String?> uploadFile(BuildContext context, File file) async {
+  Future<String?> _uploadFile(BuildContext context, File file) async {
     try {
       final task = await _storage
           .ref('posts')
@@ -65,41 +65,42 @@ class PostRepository {
     }
   }
 
-  Future uploadFiles(BuildContext context, List<File> images) async {
+  Future<List<String>> uploadFiles(
+      BuildContext context, List<File> images) async {
     List<String> urls = [];
-    await Future.wait(images.map((image) => uploadFile(context, image)))
-        .then((value) => print(value));
+    for (var element in images) {
+      final url = await _uploadFile(context, element);
+      if (url != null) {
+        urls.add(url);
+      }
+    }
+    return urls;
   }
 
-  Future<List<FeedItem>> fetchPosts(FeedItem? feedItem) async {
+  Stream<Iterable<FeedItem>> streamFeedItems(
+      String cropType, String district, int fundStatus) {
     final ref = _db.collection('posts');
 
-    final documentSnapshot = feedItem == null
-        ? await ref.orderBy('createdAt', descending: true).limit(250).get()
-        : await ref
-            .orderBy("createdAt", descending: true)
-            .startAfter([feedItem.createdAt])
-            .limit(250)
-            .get();
+    if (cropType != "") {
+      ref.where('cropType', isEqualTo: cropType);
+    }
 
-    return documentSnapshot.docs
-        .map<FeedItem>((data) => FeedItem(
-            district: data['district'],
-            address: data['address'],
-            landSize: data['landSize'],
-            measureUnit: data['measureUnit'],
-            withFund: data['withFund'],
-            withEquipment: data['withEquipment'],
-            isOrganic: data['isOrganic'],
-            leagalFund: data['leagalFund'],
-            cropType: data['cropType'],
-            images: data['images'],
-            userId: data['userId'],
-            userName: data['userName'],
-            avatar: data['avatar'],
-            createdAt: data['createdAt'],
-            updatedAt: data['updatedAt']))
-        .toList();
+    if (district != "") {
+      ref.where('district', isEqualTo: district);
+    }
+
+    if (fundStatus == 1) {
+      ref.where('withFund', isEqualTo: false);
+    } else if (fundStatus == 2) {
+      ref.where('withFund', isEqualTo: true);
+    }
+
+    return ref
+        .orderBy("createdAt", descending: true)
+        .limit(250)
+        .snapshots()
+        .map((event) =>
+            event.docs.map((doc) => FeedItem.fromMap(doc.id, doc.data())));
   }
 
   _onError(

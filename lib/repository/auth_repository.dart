@@ -21,6 +21,10 @@ class AuthRepository {
     await _auth.signOut();
   }
 
+  String getUserId() {
+    return _auth.currentUser!.uid;
+  }
+
   Future<void> signInWithPhone(
       BuildContext context,
       LoginModel loginModel,
@@ -77,7 +81,7 @@ class AuthRepository {
 
   Future<void> updateUser(BuildContext context, SignupModel signupModel) async {
     await _auth.currentUser
-        ?.updateDisplayName(signupModel.firstName + signupModel.lastName)
+        ?.updateDisplayName("${signupModel.firstName} ${signupModel.lastName}")
         .then((value) {
       final user = <String, dynamic>{
         "nic": signupModel.nic,

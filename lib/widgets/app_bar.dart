@@ -1,20 +1,20 @@
-import 'package:agropal/widgets/headline.dart';
+import 'package:agropal/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isLeading;
   final List<Widget>? actions;
 
-  MainAppBar({this.isLeading = true, this.actions});
+  const MainAppBar({this.isLeading = true, this.actions});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: isLeading,
       centerTitle: true,
       elevation: 1,
       leading: isLeading
           ? IconButton(
+              padding: EdgeInsets.zero,
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -23,9 +23,13 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 size: 38,
               ))
           : null,
-
-      title: Headline(
-        size: 20,
+      title: Text(
+        "AgroPal",
+        style: TextStyle(
+            fontFamily: 'SF Pro Text',
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: AppColors.secondary),
       ),
       // SizedBox(
       //   child: Image.asset(
