@@ -32,14 +32,9 @@ Clean Architecture Architecture
 
 
 <p align="center">
-  <table>
-  <tr>
+ <table>
+    <tr>
     <td>
-      <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
-      </p>
-    </td>
-        <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
       </p>
@@ -49,24 +44,19 @@ Clean Architecture Architecture
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
-        <td>
+      <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
-        <td>
+      <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
   </tr>
-     <tr>
+      <tr>
     <td>
-      <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
-      </p>
-    </td>
-        <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
       </p>
@@ -76,24 +66,19 @@ Clean Architecture Architecture
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
-        <td>
+      <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
-        <td>
+      <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
   </tr>
-     <tr>
+      <tr>
     <td>
-      <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
-      </p>
-    </td>
-        <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
       </p>
@@ -103,12 +88,29 @@ Clean Architecture Architecture
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
-        <td>
+      <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
     </td>
-        <td>
+      <td>
+      <p align="center">
+        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+      </p>
+    </td>
+  </tr>
+      <tr>
+    <td>
+      <p align="center">
+        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
+      </p>
+    </td>
+    <td>
+      <p align="center">
+        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+      </p>
+    </td>
+      <td>
       <p align="center">
         <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
       </p>
