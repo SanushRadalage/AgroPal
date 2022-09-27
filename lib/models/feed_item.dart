@@ -54,4 +54,24 @@ class FeedItem {
         createdAt: map['createdAt'],
         updatedAt: map['updatedAt']);
   }
+
+  factory FeedItem.fromSnapshot(DocumentSnapshot snapshot) {
+    return FeedItem(
+        id: snapshot.id,
+        district: snapshot['district'],
+        address: snapshot['address'],
+        landSize: snapshot['landSize'],
+        measureUnit: snapshot['measureUnit'],
+        withFund: snapshot['withFund'],
+        withEquipment: snapshot['withEquipment'],
+        isOrganic: snapshot['isOrganic'],
+        leagalFund: snapshot['leagalFund'],
+        cropType: snapshot['cropType'],
+        images: snapshot['images'],
+        userId: snapshot['userId'],
+        userName: snapshot['userName'],
+        avatar: snapshot['avatar'],
+        createdAt: snapshot['createdAt'],
+        updatedAt: snapshot['updatedAt']);
+  }
 }

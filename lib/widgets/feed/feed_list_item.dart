@@ -1,10 +1,13 @@
 import 'package:agropal/models/feed_item.dart';
+import 'package:agropal/providers/auth_notifier.dart';
 import 'package:agropal/theme/colors.dart';
 import 'package:agropal/utils/date_utils.dart';
+import 'package:agropal/widgets/feed/feed_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FeedListItem extends StatelessWidget {
+class FeedListItem extends ConsumerWidget {
   const FeedListItem({
     Key? key,
     required this.item,
@@ -13,7 +16,8 @@ class FeedListItem extends StatelessWidget {
   final FeedItem item;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _authenticationProvider = ref.watch(authenticationProvider);
     return InkWell(
       onTap: () =>
           Navigator.of(context).pushNamed('/detailView', arguments: item),
@@ -37,14 +41,47 @@ class FeedListItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        landSize(
-                            context,
-                            item.landSize,
-                            item.measureUnit,
-                            const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                        const SizedBox(
-                          height: 4,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            landSize(
+                                context,
+                                item.landSize,
+                                item.measureUnit,
+                                const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            PopupMenuButton(
+                              icon: Icon(
+                                Icons.more_vert,
+                                color: AppColors.iconColor,
+                              ),
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry>[
+                                PopupMenuItem(
+                                  child: Visibility(
+                                    replacement: const ListTile(
+                                      leading: Icon(Icons.report),
+                                      title: Text('Report'),
+                                    ),
+                                    visible: item.userId ==
+                                        _authenticationProvider.getUserId(),
+                                    child: ListTile(
+                                      leading: const Icon(Icons.delete),
+                                      title: const Text('Delete'),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        showDialog(
+                                            context: context,
+                                            builder: ((context) =>
+                                                feedOptionDialog(
+                                                    context, ref, item.id)));
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                         item.isOrganic
                             ? Text(

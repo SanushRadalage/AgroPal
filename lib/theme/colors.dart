@@ -7,4 +7,5 @@ class AppColors {
   static Color success = Colors.black12;
   static Color error = const Color(0xffff7466);
   static Color borderColor = const Color(0xffebebeb);
+  static Color iconColor = const Color(0xff828282);
 }

@@ -70,5 +70,12 @@
 	"gallery": "Photo from Gallery",
 	"cancel": "Cancel",
 	"createPostSuccess": "The post was created Successfully.",
-	"investOnFarming" : "Invest on farming"
+	"investOnFarming" : "Invest on farming",
+	"myPosts": "My Posts",
+	"settings": "Settings",
+	"help": "Help & Support",
+	"privacy": "Privacy Policy",
+	"terms": "Terms & Conditions",
+	"signOut": "Sign Out",
+	"deleteAccount": "Delete Account"
 }

@@ -80,7 +80,8 @@ class OtpVerifier extends ConsumerWidget {
                                         .popAndPushNamed('/userDetails');
                                   } else {
                                     Navigator.of(context)
-                                        .popAndPushNamed('/home');
+                                        .pushNamedAndRemoveUntil('/home',
+                                            (Route<dynamic> route) => false);
                                   }
                                 }
                               },

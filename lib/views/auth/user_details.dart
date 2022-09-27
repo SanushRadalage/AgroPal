@@ -17,7 +17,7 @@ class UserDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MainAppBar(
+        appBar: const MainAppBar(
           isLeading: false,
         ),
         body: SafeArea(

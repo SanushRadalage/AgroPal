@@ -7,3 +7,9 @@ String formatTimestamp(Timestamp timestamp) {
       DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
   return format.format(date);
 }
+
+String formatMilllis(int millis) {
+  var format = DateFormat('d MMM y');
+  var date = DateTime.fromMillisecondsSinceEpoch(millis);
+  return format.format(date);
+}

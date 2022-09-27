@@ -151,10 +151,10 @@ class MainBottomSheet extends ConsumerWidget {
             ),
             MainElevatedButton(
                 onPressed: () {
-                  ref.watch(postRepositoryProvider).streamFeedItems(
-                      ref.watch(sortOptionProvider).cropType,
-                      ref.watch(sortOptionProvider).district,
-                      ref.watch(sortOptionProvider).fundStatus);
+                  // ref.watch(postRepositoryProvider).streamFeedItems(
+                  //     ref.watch(sortOptionProvider).cropType,
+                  //     ref.watch(sortOptionProvider).district,
+                  //     ref.watch(sortOptionProvider).fundStatus);
                   Navigator.of(context).pop();
                 },
                 child: Text(AppLocalizations.of(context)!.done)),

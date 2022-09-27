@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:agropal/models/chat_model.dart';
+import 'package:agropal/models/user.dart' as postUser;
 import 'package:agropal/providers/chat_provider.dart';
 import 'package:agropal/theme/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,16 +11,16 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChatView extends StatefulWidget {
-  ChatView({Key? key, required this.userId}) : super(key: key);
+  ChatView({Key? key, required this.user}) : super(key: key);
 
-  String userId;
+  postUser.User user;
 
   @override
   State<ChatView> createState() => _ChatViewState();
 }
 
 class _ChatViewState extends State<ChatView> {
-  List<types.Message> _messages = [];
+  final List<types.Message> _messages = [];
 
   @override
   void initState() {
@@ -48,18 +47,18 @@ class _ChatViewState extends State<ChatView> {
         title: Row(
           children: [
             CircleAvatar(
-              radius: 13,
-              backgroundImage: const AssetImage('assets/images/user.png'),
-              child: Image.network(
-                  "https://firebasestorage.googleapis.com/v0/b/agropal-532e9.appspot.com/o/user.png?alt=media&token=921a61b8-8fb7-4cdc-a910-afde7c40bfad"),
-            ),
+                radius: 13,
+                backgroundImage: widget.user.avatar != null
+                    ? NetworkImage(widget.user.avatar!)
+                    : const NetworkImage(
+                        "https://firebasestorage.googleapis.com/v0/b/agropal-532e9.appspot.com/o/user.png?alt=media&token=3711fab4-1f20-4c33-a562-a382c94acdec")),
             const SizedBox(
               width: 6,
             ),
-            const Flexible(
+            Flexible(
               child: Text(
-                "Sanush Radalage",
-                style: TextStyle(fontSize: 16),
+                widget.user.name,
+                style: const TextStyle(fontSize: 16),
               ),
             )
           ],
@@ -91,13 +90,14 @@ class _ChatViewState extends State<ChatView> {
             onPreviewDataFetched: (p0, p1) {},
             onSendPressed: (p0) {
               ref.watch(chatProvider).addNewMessage(ChatModel(
-                  recieverId: widget.userId,
+                  recieverId: widget.user.id,
                   senderId: FirebaseAuth.instance.currentUser!.uid,
                   message: p0.text,
-                  avatar: null,
-                  createdAt: Timestamp.now().millisecondsSinceEpoch));
+                  avatar: widget.user.avatar,
+                  createdAt: Timestamp.now().millisecondsSinceEpoch,
+                  recieverName: widget.user.name));
             },
-            showUserAvatars: true,
+            showUserAvatars: false,
             showUserNames: false,
             user: types.User(
                 id: FirebaseAuth.instance.currentUser!.uid,
@@ -113,7 +113,7 @@ class _ChatViewState extends State<ChatView> {
     FirebaseDatabase.instance
         .ref('chats')
         .child(FirebaseAuth.instance.currentUser!.uid)
-        .child(widget.userId)
+        .child(widget.user.id)
         .onChildAdded
         .listen((event) {
       setState(() {
@@ -123,10 +123,12 @@ class _ChatViewState extends State<ChatView> {
             map.addEntries([MapEntry(element.key!, element.value)]);
           }
           final chatModel = ChatModel.fromMap(map);
+
           final textMessage = types.TextMessage(
-            author:
-                types.User(id: chatModel.senderId, imageUrl: chatModel.avatar),
-            createdAt: DateTime.now().millisecondsSinceEpoch,
+            author: types.User(
+                id: chatModel.senderId,
+                imageUrl: chatModel.avatar,
+                createdAt: DateTime.now().millisecondsSinceEpoch),
             id: event.snapshot.key!,
             text: chatModel.message,
           );
