@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 class Validator {
   static bool validateSpecialChars(String? input) {
-    if (input != null && input.length > 3) {
+    if (input != null && input.length >= 3) {
       return !RegExp(r"[`~!@#\$%^&*()-_=+[{]}\|;:'" ",<.>/?]").hasMatch(input);
     }
     return false;

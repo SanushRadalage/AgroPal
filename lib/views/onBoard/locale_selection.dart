@@ -1,5 +1,4 @@
 import 'package:agropal/models/language_item_model.dart';
-import 'package:agropal/providers/locale_notifier.dart';
 import 'package:agropal/providers/settings_notifier.dart';
 import 'package:agropal/theme/colors.dart';
 import 'package:agropal/theme/themes.dart';
@@ -9,31 +8,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocaleSelection extends ConsumerWidget {
-  const LocaleSelection({Key? key}) : super(key: key);
+class LocaleSelection extends StatelessWidget {
+  final languages = [
+    LanguageItem(
+      key: 'en',
+      value: 'English',
+    ),
+    LanguageItem(
+      key: 'si',
+      value: 'සිංහල',
+    ),
+    LanguageItem(
+      key: 'ta',
+      value: 'தமிழ்',
+    ),
+  ];
+
+  LocaleSelection({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final languages = [
-      LanguageItem(
-        key: 'en',
-        value: 'English',
-      ),
-      LanguageItem(
-        key: 'si',
-        value: 'සිංහල',
-      ),
-      LanguageItem(
-        key: 'ta',
-        value: 'தமிழ்',
-      ),
-    ];
-
-    LanguageItem languageSelection = languages.firstWhere(
-        (item) => ref.watch(localeProvider).languageCode == item.key);
+  Widget build(BuildContext context) {
+    LanguageItem languageSelection = languages.first;
 
     return Scaffold(
-      appBar: MainAppBar(isLeading: false),
+      appBar: const MainAppBar(isLeading: false),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Container(
@@ -85,16 +83,19 @@ class LocaleSelection extends ConsumerWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  MainElevatedButton(
-                      onPressed: () {
-                        ref
-                            .read(settingsProvider)
-                            .setLocalePref(languageSelection.key);
-                        ref.read(localeProvider.state).state =
-                            Locale(languageSelection.key);
-                        Navigator.of(context).popAndPushNamed('/login');
-                      },
-                      child: Text(AppLocalizations.of(context)!.next)),
+                  Consumer(
+                    builder:
+                        (BuildContext context, WidgetRef ref, Widget? child) {
+                      return MainElevatedButton(
+                          onPressed: () {
+                            ref
+                                .read(settingsProvider)
+                                .setLocalePref(languageSelection.key);
+                            Navigator.of(context).popAndPushNamed('/login');
+                          },
+                          child: Text(AppLocalizations.of(context)!.next));
+                    },
+                  ),
                 ],
               )
             ],

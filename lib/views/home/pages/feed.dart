@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:agropal/models/feed_item.dart';
 import 'package:agropal/providers/feed_item_provider.dart';
 import 'package:agropal/widgets/feed/feed_list_item.dart';
@@ -23,8 +21,8 @@ class Feed extends ConsumerWidget {
           return Center(
               child: Lottie.asset(
             'assets/lotties/error.json',
-            width: 200,
-            height: 200,
+            width: 100,
+            height: 100,
             fit: BoxFit.fill,
           ));
         } else {
@@ -32,7 +30,6 @@ class Feed extends ConsumerWidget {
             return ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                log(ref.watch(sortOptionProvider).cropType);
                 return FeedListItem(item: list[index]);
               },
             );

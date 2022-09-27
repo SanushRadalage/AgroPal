@@ -12,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Home extends StatelessWidget {
   static final List<Widget> _widgetOptions = <Widget>[
-    Feed(),
+    const Feed(),
     const ChatList(),
     const Text("Create Post"),
     const Jobs(),
@@ -50,9 +50,7 @@ class Home extends StatelessWidget {
           ],
         ),
         body: SafeArea(
-          child: Center(
-            child: _widgetOptions.elementAt(bottonNavProvider.currentIndex),
-          ),
+          child: _widgetOptions.elementAt(bottonNavProvider.currentIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 5,

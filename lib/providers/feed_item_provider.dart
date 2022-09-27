@@ -6,7 +6,7 @@ final postRepositoryProvider =
     Provider<PostRepository>((ref) => PostRepository());
 
 class SortOptionsNotifier extends ChangeNotifier {
-  String _district = "";
+  String _district = "All";
   String _cropType = "";
   int _fundStatus = 0;
   String get district => _district;

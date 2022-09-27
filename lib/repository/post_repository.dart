@@ -39,6 +39,7 @@ class PostRepository {
       "updatedAt": Timestamp.now()
     };
 
+    _db.settings.persistenceEnabled;
     _db.collection("posts").doc(uuid).set(post).whenComplete(() {
       _generateNewId();
       snackBar(AppLocalizations.of(context)!.createPostSuccess);
@@ -49,12 +50,13 @@ class PostRepository {
     });
   }
 
-  Future<String?> _uploadFile(BuildContext context, File file) async {
+  Future<String?> _uploadFile(
+      BuildContext context, File file, String index) async {
     try {
       final task = await _storage
           .ref('posts')
           .child(uuid)
-          .child('${const Uuid().v4()}.jpeg')
+          .child('$index.jpeg')
           .putFile(file)
           .whenComplete(() => null);
 
@@ -69,7 +71,8 @@ class PostRepository {
       BuildContext context, List<File> images) async {
     List<String> urls = [];
     for (var element in images) {
-      final url = await _uploadFile(context, element);
+      final url = await _uploadFile(
+          context, element, images.indexOf(element).toString());
       if (url != null) {
         urls.add(url);
       }
@@ -77,15 +80,33 @@ class PostRepository {
     return urls;
   }
 
+  deletePost(String docId) {
+    final snapShots = _db.collection("posts").doc(docId).get();
+    snapShots.then((value) {
+      final feedItem = FeedItem.fromSnapshot(value);
+
+      _db.collection("posts").doc(docId).delete().then((doc) {
+        for (var element in feedItem.images) {
+          _storage
+              .ref('posts')
+              .child(docId)
+              .child('${feedItem.images.indexOf(element).toString()}.jpeg')
+              .delete()
+              .then((value) => snackBar("Deleted successfully."));
+        }
+      }).onError(
+          (error, stackTrace) => snackBar("Oops! Something went wrong."));
+    });
+  }
+
   Stream<Iterable<FeedItem>> streamFeedItems(
       String cropType, String district, int fundStatus) {
     final ref = _db.collection('posts');
-
     if (cropType != "") {
       ref.where('cropType', isEqualTo: cropType);
     }
 
-    if (district != "") {
+    if (district != "All") {
       ref.where('district', isEqualTo: district);
     }
 
@@ -103,13 +124,14 @@ class PostRepository {
             event.docs.map((doc) => FeedItem.fromMap(doc.id, doc.data())));
   }
 
-  _onError(
-      BuildContext context, FirebaseAuthException e, void Function()? onError) {
-    final snackBar = SnackBar(
-      content: Text(e.message!),
-      backgroundColor: Theme.of(context).errorColor,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    if (onError != null) onError();
+  Stream<Iterable<FeedItem>> streamUserPosts() {
+    return _db
+        .collection('posts')
+        .where('userId', isEqualTo: _auth.currentUser!.uid)
+        .orderBy("createdAt", descending: true)
+        .limit(250)
+        .snapshots()
+        .map((event) =>
+            event.docs.map((doc) => FeedItem.fromMap(doc.id, doc.data())));
   }
 }

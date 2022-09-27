@@ -1,4 +1,5 @@
 import 'package:agropal/models/feed_item.dart';
+import 'package:agropal/models/user.dart';
 import 'package:agropal/providers/auth_notifier.dart';
 import 'package:agropal/theme/colors.dart';
 import 'package:agropal/widgets/app_bar.dart';
@@ -238,11 +239,10 @@ class DetailView extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 22,
-                          backgroundImage:
-                              const AssetImage('assets/images/user.png'),
-                          child: Image.network(feedItem.avatar != null
-                              ? feedItem.avatar!
-                              : "https://firebasestorage.googleapis.com/v0/b/agropal-532e9.appspot.com/o/user.png?alt=media&token=3711fab4-1f20-4c33-a562-a382c94acdec"),
+                          backgroundImage: feedItem.avatar != null
+                              ? NetworkImage(feedItem.avatar!)
+                              : const NetworkImage(
+                                  "https://firebasestorage.googleapis.com/v0/b/agropal-532e9.appspot.com/o/user.png?alt=media&token=3711fab4-1f20-4c33-a562-a382c94acdec"),
                         ),
                         const SizedBox(
                           width: 8,
@@ -264,7 +264,10 @@ class DetailView extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               Navigator.of(context).pushNamed('/chat',
-                                  arguments: feedItem.userId);
+                                  arguments: User(
+                                      id: feedItem.userId,
+                                      avatar: feedItem.avatar,
+                                      name: feedItem.userName));
                             },
                             icon: const Icon(
                               Icons.message,

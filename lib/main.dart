@@ -1,4 +1,4 @@
-import 'package:agropal/providers/locale_notifier.dart';
+import 'package:agropal/providers/settings_notifier.dart';
 import 'package:agropal/routes/routes.dart';
 import 'package:agropal/theme/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,14 +21,19 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      locale: ref.watch(localeProvider),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      title: "AgroPal",
-      theme: getAppTheme(),
-      onGenerateRoute: Routes.generateRoute,
+    return FutureBuilder(
+      future: ref.watch(settingsProvider).getLocalePref(),
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale: Locale(snapshot.data ?? 'en'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          title: "AgroPal",
+          theme: getAppTheme(),
+          onGenerateRoute: Routes.generateRoute,
+        );
+      },
     );
   }
 }

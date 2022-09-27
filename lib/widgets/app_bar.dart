@@ -31,12 +31,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             fontSize: 20,
             color: AppColors.secondary),
       ),
-      // SizedBox(
-      //   child: Image.asset(
-      //     'assets/images/logo.png',
-      //     width: 100,
-      //   ),
-      // ),
       actions: actions,
     );
   }
