@@ -36,83 +36,83 @@ Clean Architecture Architecture
     <tr>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/1.png" width="200" height="400">
       </p>
     </td>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/2.png" width="200" height="400">
       </p>
     </td>
       <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/3.png" width="200" height="400">
       </p>
     </td>
       <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/4.png" width="200" height="400">
       </p>
     </td>
   </tr>
       <tr>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/5.png" width="200" height="400">
       </p>
     </td>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/6.png" width="200" height="400">
       </p>
     </td>
       <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/7.png" width="200" height="400">
       </p>
     </td>
       <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/8.png" width="200" height="400">
       </p>
     </td>
   </tr>
       <tr>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/9.png" width="200" height="400">
       </p>
     </td>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/10.png" width="200" height="400">
       </p>
     </td>
       <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/11.png" width="200" height="400">
       </p>
     </td>
       <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/12.png" width="200" height="400">
       </p>
     </td>
   </tr>
       <tr>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/13.png" width="200" height="400">
       </p>
     </td>
     <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/14.png" width="200" height="400">
       </p>
     </td>
       <td>
       <p align="center">
-        <img src="https://github.com/SanushRadalage/ComposeSamples/blob/master/app/src/main/res/drawable/gif_dark.gif" width="200" height="400">
+        <img src="https://github.com/SanushRadalage/AgroPal/blob/main/screenshots/15.png" width="200" height="400">
       </p>
     </td>
   </tr>
