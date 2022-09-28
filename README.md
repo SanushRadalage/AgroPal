@@ -26,7 +26,7 @@ Application developed using Flutter 3.0
 
 ## Architecture
 
-Clean Architecture Architecture
+Clean Architecture
 
 ## UI
 
